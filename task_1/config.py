@@ -1,2 +1,2 @@
-PASSWORD = 'Mansur2004+'
-EMAIL = 'mansur.ham44@gmail.com'
+PASSWORD = 'твой пароль'
+EMAIL = 'example@gmail.com'
