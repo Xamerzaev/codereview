@@ -1,22 +1,30 @@
-from unittest import result
-from task_2 import db
+from run import BaseModel
+from peewee import *
 
-class User(db.Model):
-    __tablename__ = 'users'
-    id = db.Column(db.Integer(), primary_key=True)
-    name = db.Column(db.String(20), nullable=False)
-    email = db.Column(db.String(), nullable=False)   
+class User(BaseModel):
+    user_id = AutoField(column_name='UserId')
+    name = TextField(column_name='Name', null=True)
+    email = TextField(column_name='Email', null=True)
 
-class Result(db.Model):
-    __tablename__ = 'results'
-    id = db.Column(db.Integer(), primary_key=True)
-    result = db.Column(db.Integer(), nullable=False)
-    user_id = db.Column(db.Integer(), db.ForeignKey(
-        'users.id'), nullable=False)
-    subject_id = db.Column(db.Integer(), db.ForeignKey(
-        'subjects.id'), nullable=False)
+    class Meta:
+        table_name = 'Users'
 
-class Subject(db.Model):
-    __tablename__ = 'subjects'
-    id = db.Column(db.Integer(), primary_key=True)
-    name = db.Column(db.String(20), nullable=False)
+
+class Subject(BaseModel):
+    subject_id = AutoField(column_name='UserId')
+    name = TextField(column_name='Name', null=True)
+
+    class Meta:
+        table_name = 'Subjects'
+
+
+class Result(BaseModel):
+    result_id = AutoField(column_name='ResultId')
+    result = IntegerField(column_name='Result', null=True)
+    email = TextField(column_name='Email', null=True)
+    user_id = ForeignKeyField(User, related_name='name_result', null=True)
+    subject_id = ForeignKeyField(Subject, related_name='subject_result', null=True)
+
+    class Meta:
+        table_name = 'Results'
+
